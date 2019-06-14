@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Tests
+namespace Minotaur.Todo.Tests
 {
     public class Tests
     {

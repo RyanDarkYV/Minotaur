@@ -41,7 +41,7 @@ namespace Minotaur.Identity
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

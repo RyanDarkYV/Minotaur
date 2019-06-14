@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Tests
+namespace Minotaur.Identity.Tests
 {
     public class Tests
     {
