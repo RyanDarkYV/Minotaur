@@ -3,10 +3,8 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
-//using Minotaur.CommonParts.Handlers;
-//using DShop.Common.Jaeger;
+using Minotaur.CommonParts.Handlers;
 using Minotaur.CommonParts.Messages;
-using Jaeger.Thrift.Agent;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using OpenTracing;
@@ -22,43 +20,43 @@ namespace Minotaur.CommonParts.RabbitMq
 {
     public static class Extensions
     {
-        //public static IBusSubscriber UseRabbitMq(this IApplicationBuilder app)
-        //    => new BusSubscriber(app);
+        public static IBusSubscriber UseRabbitMq(this IApplicationBuilder app)
+            => new BusSubscriber(app);
 
-        //public static void AddRabbitMq(this ContainerBuilder builder)
-        //{
-        //    builder.Register(context =>
-        //    {
-        //        var configuration = context.Resolve<IConfiguration>();
-        //        var options = configuration.GetOptions<RabbitMqOptions>("rabbitMq");
+        public static void AddRabbitMq(this ContainerBuilder builder)
+        {
+            builder.Register(context =>
+            {
+                var configuration = context.Resolve<IConfiguration>();
+                var options = configuration.GetOptions<RabbitMqOptions>("rabbitMq");
 
-        //        return options;
-        //    }).SingleInstance();
+                return options;
+            }).SingleInstance();
 
-        //    builder.Register(context =>
-        //    {
-        //        var configuration = context.Resolve<IConfiguration>();
-        //        var options = configuration.GetOptions<RawRabbitConfiguration>("rabbitMq");
+            builder.Register(context =>
+            {
+                var configuration = context.Resolve<IConfiguration>();
+                var options = configuration.GetOptions<RawRabbitConfiguration>("rabbitMq");
 
-        //        return options;
-        //    }).SingleInstance();
+                return options;
+            }).SingleInstance();
 
-        //    var assembly = Assembly.GetCallingAssembly();
-        //    builder.RegisterAssemblyTypes(assembly)
-        //        .AsClosedTypesOf(typeof(IEventHandler<>))
-        //        .InstancePerDependency();
-        //    builder.RegisterAssemblyTypes(assembly)
-        //        .AsClosedTypesOf(typeof(ICommandHandler<>))
-        //        .InstancePerDependency();
-        //    builder.RegisterType<Handler>().As<IHandler>()
-        //        .InstancePerDependency();
-        //    builder.RegisterType<BusPublisher>().As<IBusPublisher>()
-        //        .InstancePerDependency();
-        //    builder.RegisterInstance(DShopDefaultTracer.Create()).As<ITracer>().SingleInstance()
-        //        .PreserveExistingDefaults();
+            var assembly = Assembly.GetCallingAssembly();
+            builder.RegisterAssemblyTypes(assembly)
+                .AsClosedTypesOf(typeof(IEventHandler<>))
+                .InstancePerDependency();
+            builder.RegisterAssemblyTypes(assembly)
+                .AsClosedTypesOf(typeof(ICommandHandler<>))
+                .InstancePerDependency();
+            builder.RegisterType<Handler>().As<IHandler>()
+                .InstancePerDependency();
+            builder.RegisterType<BusPublisher>().As<IBusPublisher>()
+                .InstancePerDependency();
+            //builder.RegisterInstance(MinotaurDefaultTracer.Create()).As<ITracer>().SingleInstance()
+                //.PreserveExistingDefaults();
 
-        //    ConfigureBus(builder);
-        //}
+            ConfigureBus(builder);
+        }
 
         private static void ConfigureBus(ContainerBuilder builder)
         {
