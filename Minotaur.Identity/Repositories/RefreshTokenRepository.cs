@@ -1,23 +1,25 @@
 ﻿using System.Threading.Tasks;
+using Minotaur.CommonParts.Mongo;
 using Minotaur.Identity.Domain;
 
 namespace Minotaur.Identity.Repositories
 {
     public class RefreshTokenRepository : IRefreshTokenRepository
     {
-        public Task<RefreshToken> GetAsync(string token)
+        private readonly IMongoRepository<RefreshToken> _repository;
+
+        public RefreshTokenRepository(IMongoRepository<RefreshToken> repository)
         {
-            throw new System.NotImplementedException();
+            _repository = repository;
         }
 
-        public Task AddAsync(RefreshToken token)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task<RefreshToken> GetAsync(string token)
+            => await _repository.GetAsync(x => x.Token == token);
 
-        public Task UpdateAsync(RefreshToken token)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task AddAsync(RefreshToken token)
+            => await _repository.AddAsync(token);
+
+        public async Task UpdateAsync(RefreshToken token)
+            => await _repository.UpdateAsync(token);
     }
 }
