@@ -81,4 +81,9 @@
     <PackageReference Include="VaultSharp" Version="0.11.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mongo\" />
+    <Folder Include="Postgres\" />
+  </ItemGroup>
+
 </Project>
