@@ -1,48 +1,99 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Minotaur.CommonParts;
+using Minotaur.CommonParts.Authentication;
+using Minotaur.CommonParts.Consul;
+using Minotaur.CommonParts.Dispatchers;
+using Minotaur.CommonParts.Mongo;
+using Minotaur.CommonParts.Mvc;
+using Minotaur.CommonParts.RabbitMq;
+using Minotaur.CommonParts.Redis;
+using Minotaur.Identity.Domain;
+using System;
+using System.Reflection;
 
 namespace Minotaur.Identity
 {
     public class Startup
     {
+         private static readonly string[] Headers = new []{ "X-Operation", "X-Resource", "X-Total-Count" };
+        public IConfiguration Configuration { get; }
+        public IContainer Container { get; private set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCustomMvc();
+            //services.AddSwaggerDocs();
+            services.AddConsul();
+            services.AddJwt();
+            //services.AddJaeger();
+            //services.AddOpenTracing();
+            services.AddRedis();
+            services.AddInitializers(typeof(IMongoDbInitializer));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", cors => 
+                        cors.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials()
+                            .WithExposedHeaders(Headers));
+            });
+
+            var builder = new ContainerBuilder();
+            builder.RegisterAssemblyTypes(Assembly.GetEntryAssembly())
+                    .AsImplementedInterfaces();
+            builder.Populate(services);
+            builder.AddMongo();
+            builder.AddMongoRepository<RefreshToken>("RefreshTokens");
+            builder.AddMongoRepository<User>("Users");
+            builder.AddRabbitMq();
+            builder.AddDispatchers();
+            builder.RegisterType<PasswordHasher<User>>().As<IPasswordHasher<User>>();
+
+            Container = builder.Build();
+
+            return new AutofacServiceProvider(Container);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
+            IApplicationLifetime applicationLifetime, IConsulClient client,
+            IStartupInitializer startupInitializer)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.EnvironmentName == "local")
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
+            
+            app.UseCors("CorsPolicy");
+            app.UseAllForwardedHeaders();
+            //app.UseSwaggerDocs();
+            app.UseErrorHandler();
+            app.UseAuthentication();
+            app.UseAccessTokenValidator();
+            app.UseServiceId();
             app.UseMvc();
+            app.UseRabbitMq();
+
+            var consulServiceId = app.UseConsul();
+            applicationLifetime.ApplicationStopped.Register(() => 
+            { 
+                client.Agent.ServiceDeregister(consulServiceId); 
+                Container.Dispose(); 
+            });
+
+            startupInitializer.InitializeAsync();
         }
     }
 }

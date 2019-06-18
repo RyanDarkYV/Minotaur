@@ -14,16 +14,18 @@ namespace Minotaur.Identity.Domain
             
         public Guid Id { get; private set; }
         public string Email { get; private set; }
+        public string Login { get; private set; }
         public string Role { get; private set; }
         public string PasswordHash { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
-        protected User()
+        protected User(string login)
         {
+            Login = login;
         }
 
-        public User(Guid id, string email, string role)
+        public User(Guid id, string email, string role, string login)
         {
             if (!EmailRegex.IsMatch(email))
             {
@@ -36,6 +38,7 @@ namespace Minotaur.Identity.Domain
                     $"Invalid role: '{role}'.");
             }        
             Id = id;
+            Login = login.ToLowerInvariant();
             Email = email.ToLowerInvariant();
             Role = role.ToLowerInvariant();
             CreatedAt = DateTime.UtcNow;
