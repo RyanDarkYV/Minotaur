@@ -8,10 +8,10 @@ namespace Minotaur.CommonParts.Types
         public DateTime CreatedDate { get; protected set; }
         public DateTime UpdatedDate { get; protected set; }
 
-        public BaseEntity(Guid id, DateTime createdDate, DateTime updatedDate)
+        public BaseEntity(Guid id)
         {
             Id = id;
-            CreatedDate = createdDate;
+            CreatedDate = DateTime.UtcNow;
             SetUpdatedDate();
         }
 

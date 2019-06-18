@@ -1,8 +1,14 @@
-﻿using Microsoft.AspNetCore;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Minotaur.CommonParts.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
-namespace Minotaur.Identity
+namespace Minotaur.Operations
 {
     public class Program
     {
@@ -13,6 +19,6 @@ namespace Minotaur.Identity
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().UseLogging();
+                .UseStartup<Startup>();
     }
 }

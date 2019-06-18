@@ -4,7 +4,7 @@ using Minotaur.CommonParts.Types;
 
 namespace Minotaur.CommonParts.Dispatchers
 {
-    public class Dispatcher : IDIspatcher
+    public class Dispatcher : IDispatcher
     {
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQueryDispatcher _queryDispatcher;

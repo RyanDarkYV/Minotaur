@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Minotaur.CommonParts.Logging;
 
-namespace Minotaur.Identity
+namespace Minotaur.Api
 {
     public class Program
     {
@@ -13,6 +13,7 @@ namespace Minotaur.Identity
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().UseLogging();
+                .UseStartup<Startup>()
+                .UseLogging());
     }
 }

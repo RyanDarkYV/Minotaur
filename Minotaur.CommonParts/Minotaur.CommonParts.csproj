@@ -82,7 +82,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mongo\" />
     <Folder Include="Postgres\" />
   </ItemGroup>
 

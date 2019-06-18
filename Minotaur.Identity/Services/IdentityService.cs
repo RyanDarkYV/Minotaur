@@ -29,7 +29,7 @@ namespace Minotaur.Identity.Services
             _busPublisher = busPublisher;
         }
 
-        public async Task SignUpAsync(Guid id, string email, string password, string role = Role.User)
+        public async Task SignUpAsync(Guid id, string email, string password, string role = Role.User, string login)
         {
             var user = await _userRepository.GetAsync(email);
             if (user != null)
@@ -41,7 +41,7 @@ namespace Minotaur.Identity.Services
             {
                 role = Role.User;
             }
-            user = new User(id, email, role);
+            user = new User(id, email, role, login);
             user.SetPassword(password, _passwordHasher);
             await _userRepository.AddAsync(user);
             await _busPublisher.PublishAsync(new SignedUp(id, email, role), CorrelationContext.Empty);

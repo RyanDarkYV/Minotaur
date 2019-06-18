@@ -8,7 +8,7 @@ namespace Minotaur.CommonParts.Dispatchers
         {
             builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>();
             builder.RegisterType<QueryDispatcher>().As<IQueryDispatcher>();
-            builder.RegisterType<Dispatcher>().As<IDIspatcher>();
+            builder.RegisterType<Dispatcher>().As<IDispatcher>();
         }
     }
 }

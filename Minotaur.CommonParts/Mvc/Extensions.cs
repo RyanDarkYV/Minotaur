@@ -1,20 +1,16 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
-using System.Reflection;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Minotaur.CommonParts.Types;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Minotaur.CommonParts.Mvc
 {
@@ -68,8 +64,8 @@ namespace Minotaur.CommonParts.Mvc
                 o.SerializerSettings.Converters.Add(new StringEnumConverter());
             });
 
-        //public static IApplicationBuilder UseErrorHandler(this IApplicationBuilder builder)
-        //    => builder.UseMiddleware<ErrorHandlerMiddleware>();
+        public static IApplicationBuilder UseErrorHandler(this IApplicationBuilder builder)
+            => builder.UseMiddleware<ErrorHandlerMiddleware>();
 
         public static IApplicationBuilder UseAllForwardedHeaders(this IApplicationBuilder builder)
             => builder.UseForwardedHeaders(new ForwardedHeadersOptions

@@ -2,10 +2,11 @@
 
 namespace Minotaur.CommonParts.Mvc
 {
-    public class ServiceId
-    {
-        private static readonly string UniqueId = $"{Guid.NewGuid():N}";
+    public class ServiceId : IServiceId
 
-        public string Id => UniqueId;
+    {
+    private static readonly string UniqueId = $"{Guid.NewGuid():N}";
+
+    public string Id => UniqueId;
     }
 }
