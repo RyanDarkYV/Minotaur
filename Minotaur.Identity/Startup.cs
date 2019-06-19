@@ -17,6 +17,8 @@ using Minotaur.CommonParts.Redis;
 using Minotaur.Identity.Domain;
 using System;
 using System.Reflection;
+using Minotaur.CommonParts.Jaeger;
+using Minotaur.CommonParts.Swagger;
 
 namespace Minotaur.Identity
 {
@@ -34,11 +36,11 @@ namespace Minotaur.Identity
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddCustomMvc();
-            //services.AddSwaggerDocs();
+            services.AddSwaggerDocs();
             services.AddConsul();
             services.AddJwt();
-            //services.AddJaeger();
-            //services.AddOpenTracing();
+            services.AddJaeger();
+            services.AddOpenTracing();
             services.AddRedis();
             services.AddInitializers(typeof(IMongoDbInitializer));
             services.AddCors(options =>
@@ -78,7 +80,7 @@ namespace Minotaur.Identity
             
             app.UseCors("CorsPolicy");
             app.UseAllForwardedHeaders();
-            //app.UseSwaggerDocs();
+            app.UseSwaggerDocs();
             app.UseErrorHandler();
             app.UseAuthentication();
             app.UseAccessTokenValidator();
