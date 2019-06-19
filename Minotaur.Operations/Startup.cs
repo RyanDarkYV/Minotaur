@@ -18,10 +18,12 @@ using Minotaur.CommonParts;
 using Minotaur.CommonParts.Consul;
 using Minotaur.CommonParts.Dispatchers;
 using Minotaur.CommonParts.Handlers;
+using Minotaur.CommonParts.Jaeger;
 using Minotaur.CommonParts.Mongo;
 using Minotaur.CommonParts.Mvc;
 using Minotaur.CommonParts.RabbitMq;
 using Minotaur.CommonParts.Redis;
+using Minotaur.CommonParts.Swagger;
 using Minotaur.Operations.Handlers;
 
 namespace Minotaur.Operations
@@ -39,9 +41,9 @@ namespace Minotaur.Operations
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddCustomMvc();
-            //services.AddSwaggerDocs();
+            services.AddSwaggerDocs();
             services.AddConsul();
-            //services.AddJaeger();
+            services.AddJaeger();
             services.AddOpenTracing();
             services.AddRedis();
             services.AddChronicle();
@@ -74,7 +76,7 @@ namespace Minotaur.Operations
             }
 
             app.UseAllForwardedHeaders();
-            //app.UseSwaggerDocs();
+            app.UseSwaggerDocs();
             app.UseErrorHandler();
             app.UseServiceId();
             app.UseMvc();

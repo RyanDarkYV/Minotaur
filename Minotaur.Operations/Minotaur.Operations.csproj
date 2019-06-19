@@ -6,18 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chronicle_" Version="2.0.0" />
+    <PackageReference Include="Chronicle_" Version="1.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="OpenTracing.Contrib.NetCore" Version="0.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Minotaur.CommonParts\Minotaur.CommonParts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Messages\Identity\Events\" />
-    <Folder Include="Sagas\" />
   </ItemGroup>
 
 </Project>
