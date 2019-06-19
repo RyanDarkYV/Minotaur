@@ -24,8 +24,13 @@ namespace Minotaur.Todo.Handlers
             var todoItem = await _repository.GetAsync(command.Id);
             if (todoItem == null)
             {
-                throw new MinotaurException("todo_item_not_found",
-                    $"TodoItem with id: '{command.Id}' was not found.");
+                
+                await _busPublisher.PublishAsync(
+                    new UpdateTodoItemRejected(command.Id, "todo_item_does_not_exist",
+                        $"TodoItem with id: '{command.Id}' was not found."), context);
+                return;
+                //throw new MinotaurException("todo_item_not_found",
+                //    $"TodoItem with id: '{command.Id}' was not found.");
             }
 
             todoItem.SetTitle(command.Title);
