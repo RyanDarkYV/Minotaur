@@ -1,0 +1,17 @@
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\bin\Debug\netcoreapp2.2\Minotaur.Api.deps.json
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\bin\Debug\netcoreapp2.2\Minotaur.Api.runtimeconfig.json
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\bin\Debug\netcoreapp2.2\Minotaur.Api.runtimeconfig.dev.json
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\bin\Debug\netcoreapp2.2\Minotaur.Api.dll
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\bin\Debug\netcoreapp2.2\Minotaur.CommonParts.dll
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\bin\Debug\netcoreapp2.2\Minotaur.CommonParts.pdb
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.csprojAssemblyReference.cache
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.csproj.CoreCompileInputs.cache
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.RazorAssemblyInfo.cache
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.RazorAssemblyInfo.cs
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.AssemblyInfoInputs.cache
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.AssemblyInfo.cs
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.RazorTargetAssemblyInfo.cache
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.csproj.CopyComplete
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\bin\Debug\netcoreapp2.2\Minotaur.Api.pdb
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.dll
+C:\Users\ryand\source\repos\Minotaur\Minotaur.Api\obj\Debug\netcoreapp2.2\Minotaur.Api.pdb
