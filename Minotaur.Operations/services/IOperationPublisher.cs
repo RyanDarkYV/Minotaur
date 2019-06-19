@@ -7,6 +7,6 @@ namespace Minotaur.Operations.Services
     {
         Task PendingAsync(ICorrelationContext context);
         Task CompleteAsync(ICorrelationContext context);
-        Task RejectedAsync(ICorrelationContext context, string code, string message);
+        Task RejectAsync(ICorrelationContext context, string code, string message);
     }
 }

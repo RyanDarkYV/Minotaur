@@ -20,7 +20,7 @@ namespace Minotaur.Operations.Services
             => await _busPublisher.PublishAsync(new OperationCompleted(context.Id,
                 context.UserId, context.Name, context.Resource), context);
 
-        public async Task RejectedAsync(ICorrelationContext context, string code, string message)
+        public async Task RejectAsync(ICorrelationContext context, string code, string message)
             => await _busPublisher.PublishAsync(new OperationRejected(context.Id,
                 context.UserId, context.Name, context.Resource, code, message), context);
     }
