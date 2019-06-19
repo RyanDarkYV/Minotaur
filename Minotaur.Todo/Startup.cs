@@ -17,6 +17,8 @@ using Minotaur.Todo.Messages.Commands;
 using Minotaur.Todo.Messages.Events;
 using System;
 using System.Reflection;
+using Minotaur.CommonParts.Jaeger;
+using Minotaur.CommonParts.Swagger;
 
 namespace Minotaur.Todo
 {
@@ -33,10 +35,10 @@ namespace Minotaur.Todo
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddCustomMvc();
-            //services.AddSwaggerDocs();
+            services.AddSwaggerDocs();
             services.AddConsul();
-            //services.AddJaeger();
-            //services.AddOpenTracing();
+            services.AddJaeger();
+            services.AddOpenTracing();
             services.AddRedis();
             services.AddInitializers(typeof(IMongoDbInitializer));
 
@@ -64,7 +66,7 @@ namespace Minotaur.Todo
             }
 
             app.UseAllForwardedHeaders();
-            //app.UseSwaggerDocs();
+            app.UseSwaggerDocs();
             app.UseErrorHandler();
             app.UseServiceId();
             app.UseMvc();

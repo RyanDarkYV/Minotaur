@@ -11,7 +11,7 @@ namespace Minotaur.Todo.Messages.Events
         public string Code { get; }
 
         [JsonConstructor]
-        public DeleteTodoItemRejected(Guid id, string reason, string code)
+        public DeleteTodoItemRejected(Guid id, string code, string reason)
         {
             Id = id;
             Reason = reason;

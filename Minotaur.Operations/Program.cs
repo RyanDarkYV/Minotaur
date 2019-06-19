@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Minotaur.CommonParts.Logging;
+using Minotaur.CommonParts.Metrics;
+using Minotaur.CommonParts.Mvc;
+using Minotaur.CommonParts.Vault;
 
 namespace Minotaur.Operations
 {
@@ -19,6 +16,10 @@ namespace Minotaur.Operations
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseLogging()
+                .UseLockbox()
+                .UseVault()
+                .UseAppMetrics();
     }
 }

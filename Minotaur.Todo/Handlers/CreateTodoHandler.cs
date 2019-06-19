@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
-using Minotaur.CommonParts.Handlers;
+﻿using Minotaur.CommonParts.Handlers;
 using Minotaur.CommonParts.RabbitMq;
-using Minotaur.CommonParts.Types;
 using Minotaur.Todo.Domain;
 using Minotaur.Todo.Messages.Commands;
 using Minotaur.Todo.Messages.Events;
 using Minotaur.Todo.Repositories;
+using System.Threading.Tasks;
 
 namespace Minotaur.Todo.Handlers
 {
@@ -23,10 +22,13 @@ namespace Minotaur.Todo.Handlers
 
         public async Task HandleAsync(CreateTodo command, ICorrelationContext context)
         {
-            if (string.IsNullOrWhiteSpace(command.Title))
+            if (await _repository.ExistsAsync(command.Id))
             {
-                throw new MinotaurException("invalid_title",
-                    "Title cannot be empty.");
+                //throw new MinotaurException("todo_item_already_exists",
+                //    $"Todo Item: '{command.Id}' already exists.");
+                await _busPublisher.PublishAsync(
+                    new CreateTodoItemRejected(command.Id, "todo_item_already_exists","Todo Item: already exists."), context);
+                return;
             }
 
             var todoItem = new TodoItem(command.Id, command.UserId, command.Description, command.Title, command.IsDone);

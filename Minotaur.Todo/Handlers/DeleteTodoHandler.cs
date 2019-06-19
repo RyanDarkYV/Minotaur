@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using Minotaur.CommonParts.Handlers;
+﻿using Minotaur.CommonParts.Handlers;
 using Minotaur.CommonParts.RabbitMq;
-using Minotaur.CommonParts.Types;
 using Minotaur.Todo.Messages.Commands;
 using Minotaur.Todo.Messages.Events;
 using Minotaur.Todo.Repositories;
+using System.Threading.Tasks;
 
 namespace Minotaur.Todo.Handlers
 {
@@ -23,8 +22,11 @@ namespace Minotaur.Todo.Handlers
         {
             if (!await _repository.ExistsAsync(command.Id))
             {
-                throw new MinotaurException("todo_item_not_found",
-                    $"TodoItem with id: '{command.Id}' was not found.");
+                //throw new MinotaurException("todo_item_not_found",
+                //    $"TodoItem with id: '{command.Id}' was not found.");
+                await _busPublisher.PublishAsync(
+                    new DeleteTodoItemRejected(command.Id, "todo_item_does_not_exist",$"TodoItem with id: '{command.Id}' was not found."), context);
+                return;
             }
 
             await _repository.DeleteAsync(command.Id);

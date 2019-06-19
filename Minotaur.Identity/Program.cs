@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Minotaur.CommonParts.Logging;
+using Minotaur.CommonParts.Metrics;
+using Minotaur.CommonParts.Mvc;
+using Minotaur.CommonParts.Vault;
 
 namespace Minotaur.Identity
 {
@@ -13,6 +16,10 @@ namespace Minotaur.Identity
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().UseLogging();
+                .UseStartup<Startup>()
+                .UseLogging()
+                .UseLockbox()
+                .UseVault()
+                .UseAppMetrics();
     }
 }
