@@ -31,11 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Minotaur.CommonParts", "Min
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Minotaur.Services.Api", "Minotaur.Services.Api", "{EAAE137E-BCA0-4EAE-99E4-CA1859CD1E19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minotaur.Api", "Minotaur.Api\Minotaur.Api.csproj", "{D25C4E7C-5E46-49F6-A7A7-BEA3587F46AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Minotaur.Api", "Minotaur.Api\Minotaur.Api.csproj", "{D25C4E7C-5E46-49F6-A7A7-BEA3587F46AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Minotaur.Services.Operations", "Minotaur.Services.Operations", "{96A79011-0300-452F-AAFB-0C65FEA52ECE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minotaur.Operations", "Minotaur.Operations\Minotaur.Operations.csproj", "{A6470745-586F-4D67-8940-DE919C53F349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Minotaur.Operations", "Minotaur.Operations\Minotaur.Operations.csproj", "{A6470745-586F-4D67-8940-DE919C53F349}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0A42ED7B-1BD8-4E18-82CE-223D081C6404}"
 EndProject
@@ -44,6 +44,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6CF073EA-DA26-4791-BE11-E1D43D2B0A64}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{09135EA4-CEC2-4373-A05D-3C40C3B39338}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3ABE660-A354-4751-8BA3-9D93E0B50F3B}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		mongo-rabbitmq-redis-postgres.yml = mongo-rabbitmq-redis-postgres.yml
+		mongo-rabbitmq-redis.yml = mongo-rabbitmq-redis.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
