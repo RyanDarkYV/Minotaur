@@ -29,7 +29,7 @@ namespace Minotaur.Identity.Services
             _busPublisher = busPublisher;
         }
 
-        public async Task SignUpAsync(Guid id, string email, string password, string role = Role.User, string login)
+        public async Task SignUpAsync(Guid id, string email, string password, string login, string role = Role.User)
         {
             var user = await _userRepository.GetAsync(email);
             if (user != null)
